@@ -67,7 +67,7 @@ hfont = {'fontname':'Lato'}
 colour1 = '#e66101'
 colour2='#5e3c99'
 
-fig, ax = plt.subplots(figsize=(width,height))
+fig, ax = plt.subplots(figsize=(width,height), tight_layout=True)
 ax.xaxis.set_major_formatter(formatter)
 ax.yaxis.set_major_formatter(formatter2)
 ticker_step = (100 * myr) / timestep
@@ -81,7 +81,13 @@ ax.invert_yaxis()
 ax.set_xlabel("Time (Myr)", **hfont)
 ax.set_ylabel("Cooling rate (K/Myr)", **hfont)
 plt.legend()  # prop={'family':'Lato'})
-ax.set_title("Cooling rates at depth of pallasite genesis \n(depths based on Imilac metal cooling rate)", **hfont)
-fig_name = "compare_cooling_rates.pdf"
-plt.savefig(fig_name, bbox_inches='tight')
+ax.set_title("Cooling rates at depth of pallasite genesis", **hfont)
+fig.supxlabel(
+	r'$\bf Figure ~1:$ Cooling rates experienced in the region of pallasite formation.'
+	'\n'
+	r'Region depth defined by metallographic cooling rates of the Imilac meteorite.',
+	x=0.05, ha='left', size='medium')
+
+fig_name = "compare_cooling_rates_test.pdf"
+#plt.savefig(fig_name, bbox_inches='tight')
 plt.show()
