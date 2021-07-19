@@ -31,8 +31,19 @@ def temp_through_time_plot(mantle_temp, depth, timestep, fig=None, ax=None):
 	return fig, ax
 
 
-def temp_across_depths_plot(mantle_temp, core_temp, time, fig=None, ax=None):
+def temp_across_depths_plot(mantle_temp, core_temp, time, fig=None, ax=None, label=''):
 	full_temps = np.concatenate((mantle_temp[-1:0:-1, :], core_temp[-1:0:-1, :]), axis=0)
+	x_temps = full_temps[:, time]
+	y_depth = np.arange(1, len(x_temps)+1)
+	if (fig is None) and (ax is None):
+		fig, ax = plt.subplots()
+	plt.plot(x_temps, y_depth, label)
+	ax.set_ylim(len(x_temps)+5, -3)
+	return fig, ax
+
+
+def temp_across_mantle_depths_plot(mantle_temp, time, fig=None, ax=None):
+	full_temps = mantle_temp
 	x_temps = full_temps[:, time]
 	y_depth = np.arange(1, len(x_temps)+1)
 	if (fig is None) and (ax is None):
@@ -40,4 +51,3 @@ def temp_across_depths_plot(mantle_temp, core_temp, time, fig=None, ax=None):
 	plt.plot(x_temps, y_depth)
 	ax.set_ylim(len(x_temps)+5, -3)
 	return fig, ax
-
